@@ -6,7 +6,7 @@
 class Player : public GameObject
 {
 public:
-	Player(Window*);
+	Player(sf::Vector2f);
 	~Player();
 
 	void update(float) override;

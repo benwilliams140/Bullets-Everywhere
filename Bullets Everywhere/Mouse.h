@@ -12,6 +12,7 @@ public:
 	void update(float) override;
 
 private:
+	Window* window;
 };
 
 #endif

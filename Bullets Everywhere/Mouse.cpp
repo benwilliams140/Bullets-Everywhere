@@ -1,6 +1,7 @@
 #include "Mouse.h"
 
-Mouse::Mouse(Window* _window) :  GameObject(_window, "./assets/target.png")
+Mouse::Mouse(Window* _window) :  window(_window),
+	GameObject("./assets/target.png")
 {
 
 }

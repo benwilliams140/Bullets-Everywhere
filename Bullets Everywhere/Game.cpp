@@ -4,7 +4,10 @@ Game::Game()
 {
 	window = new Window(windowTitle, windowWidth, windowHeight);
 	mouse = new Mouse(window);
-	player = new Player(window);
+	player = new Player(sf::Vector2f(windowWidth / 2, windowHeight / 2));
+
+	Gun* gun = new Gun(player, mouse);
+	objects.push_back(gun);
 
 	state = State::PAUSED;
 }
@@ -72,13 +75,13 @@ void Game::render()
 {
 	window->clear(sf::Color::Black);
 
-	mouse->render();
-	player->render();
+	mouse->render(window);
+	player->render(window);
 
 	for (auto it = objects.begin(); it != objects.end(); ++it)
 	{
 		GameObject* _object = *it;
-		_object->render();
+		_object->render(window);
 	}
 
 	window->display();

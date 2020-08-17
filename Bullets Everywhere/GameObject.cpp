@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(Window* _window, std::string _fileName, float _xPos, float _yPos) : window(_window)
+GameObject::GameObject(std::string _fileName, sf::Vector2f _pos)
 {
 	if (!tex.loadFromFile(_fileName))
 		std::cout << "Unable to load texture file: " << _fileName << std::endl;
@@ -12,7 +12,7 @@ GameObject::GameObject(Window* _window, std::string _fileName, float _xPos, floa
 
 	rect.setSize(sf::Vector2f(_width, _height));
 	rect.setOrigin(sf::Vector2f(_width / 2, _height / 2));
-	rect.setPosition(sf::Vector2f(_xPos, _yPos));
+	rect.setPosition(_pos);
 }
 
 GameObject::~GameObject()
@@ -25,7 +25,12 @@ void GameObject::update(float _deltaTime)
 
 }
 
-void GameObject::render()
+void GameObject::render(Window* _window)
 {
-	window->render(rect);
+	_window->render(rect);
+}
+
+sf::Vector2f GameObject::getPos()
+{
+	return rect.getPosition();
 }

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Window* _window) : GameObject(_window, "./assets/player.png", _window->getWidth() / 2, _window->getHeight() / 2)
+Player::Player(sf::Vector2f _pos) : GameObject("./assets/player.png", _pos)
 {
 	dx = 0;
 	dy = 0;

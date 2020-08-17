@@ -5,6 +5,7 @@
 #include "Mouse.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "Gun.h"
 
 const std::string windowTitle = "Bullets Everywhere";
 const unsigned int windowWidth = 1024;
