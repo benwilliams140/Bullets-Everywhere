@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Mouse.h"
 #include "GameObject.h"
+#include "Player.h"
 
 const std::string windowTitle = "Bullets Everywhere";
 const unsigned int windowWidth = 1024;
@@ -33,6 +34,8 @@ private:
 	Window* window;
 	Mouse* mouse;
 	State state;
+
+	Player* player;
 
 	std::vector<GameObject*> objects;
 };
