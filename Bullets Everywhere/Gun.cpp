@@ -22,4 +22,12 @@ void Gun::update(float _deltaTime)
 
 	rect.setScale(sf::Vector2f(dir, 1));
 	rect.setPosition(sf::Vector2f(_playerPos.x + dir * 20, _playerPos.y));
+
+	float _deltaX = _mousePos.x - _playerPos.x;
+	float _deltaY = _mousePos.y - _playerPos.y;
+
+	float _angle = atan(_deltaY / _deltaX) * 180 / M_PI;
+	//std::cout << _angle << std::endl;
+
+	rect.setRotation(_angle);
 }
