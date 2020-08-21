@@ -1,7 +1,7 @@
 #include "Gun.h"
 
-Gun::Gun(Player* _player, Mouse* _mouse) : player(_player), mouse(_mouse),
-	GameObject("./assets/gun.png", _player->getPos())
+Gun::Gun(Mouse* _mouse) : mouse(_mouse),
+	GameObject("./assets/gun.png")
 {
 
 }
@@ -11,10 +11,9 @@ Gun::~Gun()
 
 }
 
-void Gun::update(float _deltaTime)
+void Gun::update(sf::Vector2f _playerPos, float _deltaTime)
 {
 	sf::Vector2f _mousePos = mouse->getPos();
-	sf::Vector2f _playerPos = player->getPos();
 	int dir;
 
 	if (_mousePos.x < _playerPos.x) dir = -1;
@@ -30,4 +29,9 @@ void Gun::update(float _deltaTime)
 	//std::cout << _angle << std::endl;
 
 	rect.setRotation(_angle);
+}
+
+Bullet* Gun::shoot()
+{
+	return NULL;
 }

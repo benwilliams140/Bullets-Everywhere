@@ -19,8 +19,12 @@ public:
 
 	sf::Vector2f getPos();
 
+	sf::Vector2f setXVel(float);
+	sf::Vector2f setYVel(float);
+
 protected:
 	sf::RectangleShape rect;
+	sf::Vector2f velocity;
 
 private:
 	sf::Texture tex;

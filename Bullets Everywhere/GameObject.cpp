@@ -22,7 +22,7 @@ GameObject::~GameObject()
 
 void GameObject::update(float _deltaTime)
 {
-
+	rect.setPosition(rect.getPosition() + velocity);
 }
 
 void GameObject::render(Window* _window)
@@ -33,4 +33,16 @@ void GameObject::render(Window* _window)
 sf::Vector2f GameObject::getPos()
 {
 	return rect.getPosition();
+}
+
+sf::Vector2f GameObject::setXVel(float _xVel)
+{
+	velocity.x = _xVel;
+	return velocity;
+}
+
+sf::Vector2f GameObject::setYVel(float _yVel)
+{
+	velocity.y = _yVel;
+	return velocity;
 }

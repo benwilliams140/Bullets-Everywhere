@@ -2,8 +2,7 @@
 
 Player::Player(sf::Vector2f _pos) : GameObject("./assets/player.png", _pos)
 {
-	dx = 0;
-	dy = 0;
+	currentGun = NULL;
 }
 
 Player::~Player()
@@ -13,16 +12,32 @@ Player::~Player()
 
 void Player::update(float _deltaTime)
 {
-	sf::Vector2f _pos = rect.getPosition();
-	rect.setPosition(sf::Vector2f(_pos.x + dx, _pos.y + dy));
+	currentGun->update(rect.getPosition(), _deltaTime);
+	GameObject::update(_deltaTime);
 }
 
-void Player::setDx(int _dx)
+void Player::render(Window* _window)
 {
-	dx = _dx;
+	currentGun->render(_window);
+	GameObject::render(_window);
 }
 
-void Player::setDy(int _dy)
+Bullet* Player::shoot()
 {
-	dy = _dy;
+	return currentGun->shoot();
+}
+
+void Player::addGun(Gun* _gun)
+{
+	currentGun = _gun;
+	guns.push_back(_gun);
+}
+
+
+Gun* Player::dropCurrentGun()
+{
+	Gun* _droppedGun = currentGun;
+	guns.pop_back();
+	currentGun = guns.back();
+	return _droppedGun;
 }

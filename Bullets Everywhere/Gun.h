@@ -2,20 +2,20 @@
 #define GUN_H
 
 #include "GameObject.h"
-#include "Player.h"
 #include "Mouse.h"
 #include "Window.h"
+#include "Bullet.h"
 
 class Gun : public GameObject
 {
 public:
-	Gun(Player*, Mouse*);
+	Gun(Mouse*);
 	~Gun();
 
-	void update(float) override;
+	void update(sf::Vector2f, float);
+	Bullet* shoot();
 
 private:
-	Player* player;
 	Mouse* mouse;
 };
 

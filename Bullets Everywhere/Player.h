@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "GameObject.h"
+#include "Gun.h"
+#include "Bullet.h"
 
 class Player : public GameObject
 {
@@ -10,12 +12,15 @@ public:
 	~Player();
 
 	void update(float) override;
-	
-	void setDx(int);
-	void setDy(int);
+	void render(Window*) override;
+	Bullet* shoot();
+
+	void addGun(Gun*);
+	Gun* dropCurrentGun();
 
 private:
-	int dx, dy;
+	std::vector<Gun*> guns;
+	Gun* currentGun;
 };
 
 #endif

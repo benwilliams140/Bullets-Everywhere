@@ -3,9 +3,9 @@
 
 #include "Window.h"
 #include "Mouse.h"
-#include "GameObject.h"
 #include "Player.h"
 #include "Gun.h"
+#include "Bullet.h"
 
 const std::string windowTitle = "Bullets Everywhere";
 const unsigned int windowWidth = 1024;
@@ -38,7 +38,7 @@ private:
 
 	Player* player;
 
-	std::vector<GameObject*> objects;
+	std::vector<Bullet*> bullets;
 };
 
 #endif

@@ -6,8 +6,7 @@ Game::Game()
 	mouse = new Mouse(window);
 	player = new Player(sf::Vector2f(windowWidth / 2, windowHeight / 2));
 
-	Gun* gun = new Gun(player, mouse);
-	objects.push_back(gun);
+	player->addGun(new Gun(mouse));
 
 	state = State::PAUSED;
 }
@@ -41,18 +40,24 @@ void Game::processInput()
 
 		if (_event.type == sf::Event::KeyPressed)
 		{
-			if (_event.key.code == sf::Keyboard::A) player->setDx(-1); // left
-			if (_event.key.code == sf::Keyboard::D) player->setDx(1); // right
-			if (_event.key.code == sf::Keyboard::W) player->setDy(-1); // up
-			if (_event.key.code == sf::Keyboard::S) player->setDy(1); // down
+			if (_event.key.code == sf::Keyboard::A) player->setXVel(-1); // left
+			if (_event.key.code == sf::Keyboard::D) player->setXVel(1); // right
+			if (_event.key.code == sf::Keyboard::W) player->setYVel(-1); // up
+			if (_event.key.code == sf::Keyboard::S) player->setYVel(1); // down
 		}
 
 		if (_event.type == sf::Event::KeyReleased)
 		{
 			if (_event.key.code == sf::Keyboard::A || _event.key.code == sf::Keyboard::D)
-				player->setDx(0);
+				player->setXVel(0);
 			if (_event.key.code == sf::Keyboard::W || _event.key.code == sf::Keyboard::S)
-				player->setDy(0);
+				player->setYVel(0);
+		}
+
+		if (_event.type == sf::Event::MouseButtonPressed)
+		{
+			if (_event.key.code == sf::Mouse::Left)
+				bullets.push_back(player->shoot());
 		}
 	}
 }
@@ -64,10 +69,9 @@ void Game::update(float _deltaTime)
 	mouse->update(_deltaTime);
 	player->update(_deltaTime);
 
-	for (auto it = objects.begin(); it != objects.end(); ++it)
+	for (auto _bullet = bullets.begin(); _bullet != bullets.end(); ++_bullet)
 	{
-		GameObject* _object = *it;
-		_object->update(_deltaTime);
+		(*_bullet)->update(_deltaTime);
 	}
 }
 
@@ -78,10 +82,9 @@ void Game::render()
 	mouse->render(window);
 	player->render(window);
 
-	for (auto it = objects.begin(); it != objects.end(); ++it)
+	for (auto _bullet = bullets.begin(); _bullet != bullets.end(); ++_bullet)
 	{
-		GameObject* _object = *it;
-		_object->render(window);
+		(*_bullet)->render(window);
 	}
 
 	window->display();
