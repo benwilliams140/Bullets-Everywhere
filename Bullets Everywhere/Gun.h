@@ -3,7 +3,6 @@
 
 #include "GameObject.h"
 #include "Mouse.h"
-#include "Window.h"
 #include "Bullet.h"
 
 class Gun : public GameObject
@@ -13,10 +12,12 @@ public:
 	~Gun();
 
 	void update(sf::Vector2f, float);
+	void render(Window*) override;
 	Bullet* shoot();
 
 private:
 	Mouse* mouse;
+	Bullet* bullet;
 };
 
 #endif

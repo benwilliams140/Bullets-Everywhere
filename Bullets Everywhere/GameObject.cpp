@@ -2,7 +2,9 @@
 
 GameObject::GameObject(std::string _fileName, sf::Vector2f _pos)
 {
-	if (!tex.loadFromFile(_fileName))
+	if (tex.loadFromFile(_fileName))
+		std::cout << "Successfully loaded texture file: " << _fileName << std::endl;
+	else
 		std::cout << "Unable to load texture file: " << _fileName << std::endl;
 
 	rect.setTexture(&tex, true);
@@ -30,7 +32,7 @@ void GameObject::render(Window* _window)
 	_window->render(rect);
 }
 
-sf::Vector2f GameObject::getPos()
+sf::Vector2f GameObject::getPosition()
 {
 	return rect.getPosition();
 }
@@ -45,4 +47,9 @@ sf::Vector2f GameObject::setYVel(float _yVel)
 {
 	velocity.y = _yVel;
 	return velocity;
+}
+
+void GameObject::setPosition(sf::Vector2f _pos)
+{
+	rect.setPosition(_pos);
 }

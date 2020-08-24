@@ -2,12 +2,15 @@
 #define BULLET_H
 
 #include "GameObject.h"
+#include "Mouse.h"
 
 class Bullet : public GameObject
 {
 public:
-	Bullet(sf::Vector2f);
+	Bullet(float, sf::Vector2f);
 	~Bullet();
+
+	void update(Window*, float);
 
 private:
 

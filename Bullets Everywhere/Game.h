@@ -32,6 +32,8 @@ private:
 	void update(float);
 	void render();
 
+	float totalTimeElapsed;
+
 	Window* window;
 	Mouse* mouse;
 	State state;

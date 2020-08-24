@@ -12,19 +12,20 @@ Player::~Player()
 
 void Player::update(float _deltaTime)
 {
-	currentGun->update(rect.getPosition(), _deltaTime);
+	if(currentGun) currentGun->update(rect.getPosition(), _deltaTime);
 	GameObject::update(_deltaTime);
 }
 
 void Player::render(Window* _window)
 {
-	currentGun->render(_window);
+	if(currentGun) currentGun->render(_window);
 	GameObject::render(_window);
 }
 
 Bullet* Player::shoot()
 {
-	return currentGun->shoot();
+	if(currentGun) return currentGun->shoot();
+	return NULL;
 }
 
 void Player::addGun(Gun* _gun)
@@ -37,7 +38,6 @@ void Player::addGun(Gun* _gun)
 Gun* Player::dropCurrentGun()
 {
 	Gun* _droppedGun = currentGun;
-	guns.pop_back();
-	currentGun = guns.back();
+	currentGun = NULL;
 	return _droppedGun;
 }

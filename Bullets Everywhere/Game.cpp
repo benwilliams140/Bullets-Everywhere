@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game() : totalTimeElapsed(0.0f)
 {
 	window = new Window(windowTitle, windowWidth, windowHeight);
 	mouse = new Mouse(window);
@@ -44,6 +44,8 @@ void Game::processInput()
 			if (_event.key.code == sf::Keyboard::D) player->setXVel(1); // right
 			if (_event.key.code == sf::Keyboard::W) player->setYVel(-1); // up
 			if (_event.key.code == sf::Keyboard::S) player->setYVel(1); // down
+			
+			if (_event.key.code == sf::Keyboard::Q) player->dropCurrentGun();
 		}
 
 		if (_event.type == sf::Event::KeyReleased)
@@ -57,7 +59,10 @@ void Game::processInput()
 		if (_event.type == sf::Event::MouseButtonPressed)
 		{
 			if (_event.key.code == sf::Mouse::Left)
-				bullets.push_back(player->shoot());
+			{
+				Bullet* _bullet = player->shoot();
+				if (_bullet) bullets.push_back(_bullet);
+			}
 		}
 	}
 }
@@ -65,6 +70,8 @@ void Game::processInput()
 void Game::update(float _deltaTime)
 {
 	if (state == State::PAUSED) return;
+
+	totalTimeElapsed += _deltaTime;
 
 	mouse->update(_deltaTime);
 	player->update(_deltaTime);

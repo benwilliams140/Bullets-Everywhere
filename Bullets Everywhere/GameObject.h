@@ -17,10 +17,11 @@ public:
 	virtual void update(float);
 	virtual void render(Window*);
 
-	sf::Vector2f getPos();
+	sf::Vector2f getPosition();
 
 	sf::Vector2f setXVel(float);
 	sf::Vector2f setYVel(float);
+	void setPosition(sf::Vector2f);
 
 protected:
 	sf::RectangleShape rect;
