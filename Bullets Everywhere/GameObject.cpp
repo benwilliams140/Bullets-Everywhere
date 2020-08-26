@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(std::string _fileName, sf::Vector2f _pos)
+GameObject::GameObject(std::string _fileName, sf::Vector2f _pos, float _speed) : speed(_speed)
 {
 	if (tex.loadFromFile(_fileName))
 		std::cout << "Successfully loaded texture file: " << _fileName << std::endl;
@@ -24,12 +24,22 @@ GameObject::~GameObject()
 
 void GameObject::update(float _deltaTime)
 {
-	rect.setPosition(rect.getPosition() + velocity);
+	rect.setPosition(rect.getPosition() + velocity * speed);
 }
 
 void GameObject::render(Window* _window)
 {
 	_window->render(rect);
+}
+
+bool GameObject::inBounds(Window* _window)
+{
+	int _lowerX = rect.getPosition().x - rect.getSize().x / 2;
+	int _upperX = rect.getPosition().x + rect.getSize().x / 2;
+	int _lowerY = rect.getPosition().y - rect.getSize().y / 2;
+	int _upperY = rect.getPosition().y + rect.getSize().y / 2;
+
+	return _lowerX >= 0 && _upperX <= _window->getWidth() && _lowerY >= 0 && _upperY <= _window->getHeight();
 }
 
 sf::Vector2f GameObject::getPosition()

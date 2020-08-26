@@ -11,11 +11,13 @@
 class GameObject
 {
 public:
-	GameObject(std::string, sf::Vector2f = sf::Vector2f(0.0f, 0.0f));
+	GameObject(std::string, sf::Vector2f = sf::Vector2f(0.0f, 0.0f), float = 1.0f);
 	~GameObject();
 
 	virtual void update(float);
 	virtual void render(Window*);
+
+	bool inBounds(Window*);
 
 	sf::Vector2f getPosition();
 
@@ -26,6 +28,7 @@ public:
 protected:
 	sf::RectangleShape rect;
 	sf::Vector2f velocity;
+	float speed;
 
 private:
 	sf::Texture tex;

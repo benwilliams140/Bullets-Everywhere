@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(sf::Vector2f _pos) : GameObject("./assets/player.png", _pos)
+Player::Player(sf::Vector2f _pos) : GameObject("./assets/player.png", _pos, 2.0f)
 {
 	currentGun = NULL;
 }

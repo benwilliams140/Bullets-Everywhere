@@ -76,9 +76,18 @@ void Game::update(float _deltaTime)
 	mouse->update(_deltaTime);
 	player->update(_deltaTime);
 
-	for (auto _bullet = bullets.begin(); _bullet != bullets.end(); ++_bullet)
+	for (auto _it = bullets.begin(); _it != bullets.end(); )
 	{
-		(*_bullet)->update(_deltaTime);
+		Bullet* _bullet = *_it;
+		_bullet->update(_deltaTime);
+		
+		if (_bullet->inBounds(window)) ++_it;
+		else
+		{
+			Bullet* _temp = *_it;
+			_it = bullets.erase(_it);
+			delete _temp;
+		}
 	}
 }
 

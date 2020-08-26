@@ -10,10 +10,7 @@ public:
 	Bullet(float, sf::Vector2f);
 	~Bullet();
 
-	void update(Window*, float);
-
 private:
-
 };
 
 #endif
